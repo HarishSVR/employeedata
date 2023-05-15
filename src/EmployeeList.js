@@ -35,6 +35,8 @@ const EmployeeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [num, setNum] = useState(1);
+  const [order, setOrder] = useState("Asc");
+
   var totalPosts = list.length;
   const addList = (person) => {
     if (currentId == -1) {
@@ -91,6 +93,36 @@ const EmployeeList = () => {
     console.log("latest", num);
   };
   console.log("latest11", currentPage);
+
+  const sortingName = () => {
+    if (order === "Asc") {
+      const strAscending = [...list].sort((a, b) => (a.name > b.name ? 1 : -1));
+      setList(strAscending);
+      setOrder("Dsc");
+    }
+    if (order === "Dsc") {
+      const strDescending = [...list].sort((a, b) =>
+        a.name > b.name ? -1 : 1
+      );
+      setList(strDescending);
+      setOrder("Asc");
+    }
+  };
+  const sortingAge = () => {
+    if (order === "Asc") {
+      const strAscending = [...list].sort((a, b) => (a.name > b.name ? 1 : -1));
+      setList(strAscending);
+      setOrder("Dsc");
+    }
+    if (order === "Dsc") {
+      const strDescending = [...list].sort((a, b) =>
+        a.name > b.name ? -1 : 1
+      );
+      setList(strDescending);
+      setOrder("Asc");
+    }
+  };
+
   return (
     <Container>
       <h1>Employee List</h1>
@@ -104,14 +136,17 @@ const EmployeeList = () => {
         <OpenForm
           addList={addList}
           currentId={currentId}
+          setShow={setShow}
           data={list[currentId] || {}}
         />
       )}
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Age</th>
+            <th onClick={() => sortingName()}>Name</th>
+            <th onClick={() => sortingAge()}>
+              <i class="bi bi-arrow-down-short"></i>Age
+            </th>
           </tr>
         </thead>
 

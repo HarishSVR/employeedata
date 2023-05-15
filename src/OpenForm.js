@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import CloseButton from "react-bootstrap/CloseButton";
 
-function OpenForm({ addList, data }) {
+function OpenForm({ addList, data, setShow }) {
   const [person, setPerson] = useState(data);
 
   const insertData = (event) => {
@@ -18,11 +19,14 @@ function OpenForm({ addList, data }) {
 
     console.log("latest11", person);
   };
-
+  const close = () => {
+    setShow(false);
+  };
   return (
     <Modal show>
       <Modal.Header>
         <Modal.Title>New Employee</Modal.Title>
+        <CloseButton onClick={() => close()} />
       </Modal.Header>
       <Modal.Body>
         <Form.Group className="mb-3">
